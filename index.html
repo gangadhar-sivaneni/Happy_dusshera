@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Dusshera 🌼</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Noto Sans', sans-serif;
+            background: radial-gradient(ellipse at top left, #0a2342 0%, #0c2b3f 25%, #081826 100%);
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .stage {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 640px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border-radius: 18px;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(2, 6, 23, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+            overflow: hidden;
+            backdrop-filter: blur(6px);
+        }
+
+        .lights {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .light {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(6px);
+            opacity: 0.85;
+            mix-blend-mode: screen;
+            animation: float 8s linear infinite, blink 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-18px)
+            }
+
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 0.9
+            }
+
+            50% {
+                opacity: 0.2
+            }
+        }
+
+        .petal-wrap {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2
+        }
+
+        .petal {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: radial-gradient(circle at 30% 30%, #ffd27a, #ff8a00);
+            transform: rotate(25deg);
+            border-radius: 40% 60% 60% 40%/40% 50% 50% 60%;
+            opacity: 0.95;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+            animation: petalFall linear infinite;
+        }
+
+        @keyframes petalFall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0
+            }
+
+            10% {
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(380deg);
+                opacity: 0.9
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            height: 100%;
+        }
+
+        .left,
+        .center,
+        .right {
+            flex: 1
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center
+        }
+
+        .devi-card {
+            width: 320px;
+            height: 320px;
+            border-radius: 20px;
+            padding: 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .devi {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 6px solid rgba(255, 230, 165, 0.06);
+            transform: translateY(0);
+            transition: transform .6s cubic-bezier(.2, .9, .2, 1);
+        }
+
+        .devi-card:hover .devi {
+            transform: translateY(-6px) scale(1.02)
+        }
+
+        h1 {
+            font-size: clamp(1.6rem, 3.5vw, 3rem);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-align: center
+        }
+
+        p.lead {
+            opacity: 0.9;
+            text-align: center;
+            margin-bottom: 12px
+        }
+
+        .garland {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            z-index: 4;
+            pointer-events: none
+        }
+
+        .garland .bead {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #ffd27a, #ff8a00);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .garland .flower {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 30%, #fffec8, #ffb347);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35)
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 14px
+        }
+
+        .btn {
+            background: linear-gradient(180deg, #ffcf72, #ff8a00);
+            border: none;
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(255, 140, 0, 0.12);
+            transition: transform .18s
+        }
+
+        .btn:active {
+            transform: translateY(2px)
+        }
+
+        .btn.secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff
+        }
+
+        .wish-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        .wish-card p {
+            line-height: 1.5
+        }
+
+        .diya {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px
+        }
+
+        .diya .flame {
+            width: 24px;
+            height: 38px;
+            border-radius: 50% 50% 40% 40%;
+            background: linear-gradient(180deg, #ffd86b, #ff6a00);
+            filter: blur(0.2px);
+            box-shadow: 0 6px 30px rgba(255, 120, 0, 0.25);
+            animation: flicker 1.2s infinite
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: scaleY(1)
+            }
+
+            50% {
+                transform: scaleY(0.92)
+            }
+
+            100% {
+                transform: scaleY(1)
+            }
+        }
+
+        @media (max-width:880px) {
+            .content {
+                flex-direction: column
+            }
+
+            .left,
+            .right {
+                width: 100%
+            }
+
+            .devi-card {
+                width: 260px;
+                height: 260px
+            }
+        }
+
+        .myname {
+            align-items: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            position: relative;
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage" role="main" aria-label="Dusshera greeting card">
+        <div class="garland" aria-hidden="true">
+            <div class="bead"></div>
+            <div class="flower"></div>
+            <div class="bead"></div>
+            <div class="flower"></div>
+            <div class="bead"></div>
+        </div>
+        <div class="lights" id="lights" aria-hidden="true">
+        </div>
+        <div class="petal-wrap" id="petals" aria-hidden="true"></div>
+        <div class="content">
+            <div class="left" style="display:flex;align-items:center;justify-content:center">
+                <div class="wish-card">
+                    <h2 style="margin-bottom:6px">Warm Wishes</h2>
+                    <p>May the victory of good over evil bring joy, health, and harmony to you and your family.
+                        Celebrate with lights, sweets and togetherness.</p>
+                    <div style="height:12px"></div>
+                    <p style="font-style:italic;opacity:0.9">-- Happy Dusshera</p>
+                </div>
+            </div>
+
+            <div class="center">
+                <div class="devi-card" title="Goddess Devi">
+                    <img class="devi" id="deviImg" src="images.jpg" alt="Goddess Devi illustration" />
+                </div>
+
+                <h1>Happy Dusshera 🌼</h1>
+                <p class="lead">Victory of good over evil — may your life be filled with light and love.</p>
+
+                <div class="controls">
+                    <button class="btn" id="toggleLights">Toggle Lights</button>
+                    <button class="btn secondary" id="changeBg"> Background</button>
+                </div>
+            </div>
+
+            <div class="right" style="display:flex;align-items:center;justify-content:center">
+                <div class="wish-card">
+                    <h3 style="margin-bottom:8px">Shareable Message</h3>
+                    <p id="shareText">May the blessings of Devi be with you today and always. Wishing you and your loved
+                        ones a joyful Dusshera.</p>
+                    <div style="height:12px"></div>
+                    <button class="btn" id="copyBtn">Copy Message</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="diya" aria-hidden="true">
+            <div class="flame"></div>
+            <div style="width:80px;height:20px;background:linear-gradient(180deg,#4b2e14,#2e180a);border-radius:20px">
+            </div>
+        </div>
+        <div>
+            <P class="myname"> made by gangadhar sivaneni </P>
+        </div>
+
+    </div>
+
+    <script>
+        const lightsEl = document.getElementById('lights');
+        const petalsEl = document.getElementById('petals');
+        const toggleBtn = document.getElementById('toggleLights');
+        const changeBgBtn = document.getElementById('changeBg');
+        const copyBtn = document.getElementById('copyBtn');
+        let lightsOn = true;
+        function createLights(count = 14) {
+            lightsEl.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const l = document.createElement('div');
+                l.className = 'light';
+                const size = Math.random() * 120 + 30;
+                l.style.width = size + 'px';
+                l.style.height = size + 'px';
+                l.style.left = Math.random() * 100 + '%';
+                l.style.top = Math.random() * 70 + '%';
+                l.style.background = `radial-gradient(circle at 30% 30%, rgba(255,255,180,${0.95 - Math.random() * 0.5}), rgba(255,140,20,${0.05 + Math.random() * 0.3}))`;
+                l.style.animationDuration = (6 + Math.random() * 8) + 's';
+                l.style.opacity = 0.7 + Math.random() * 0.3;
+                lightsEl.appendChild(l);
+            }
+        }
+        function createPetals(count = 12) {
+            petalsEl.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'petal';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = (-10 - Math.random() * 20) + 'vh';
+                p.style.animationDuration = (7 + Math.random() * 9) + 's';
+                p.style.transform = `rotate(${Math.random() * 180}deg)`;
+                p.style.opacity = 0.95 - Math.random() * 0.4;
+                p.style.width = (12 + Math.random() * 30) + 'px';
+                p.style.height = (12 + Math.random() * 30) + 'px';
+                petalsEl.appendChild(p);
+            }
+        }
+        toggleBtn.addEventListener('click', () => {
+            lightsOn = !lightsOn;
+            lightsEl.style.opacity = lightsOn ? '1' : '0';
+            toggleBtn.textContent = lightsOn ? 'Toggle Lights' : 'Turn Lights On';
+        });
+        const backgrounds = [
+            'radial-gradient(ellipse at top left, #0a2342 0%, #0c2b3f 25%, #081826 100%)',
+            'linear-gradient(135deg,#0b3b2e 0%,#183a4b 40%,#071b2b 100%)',
+            'linear-gradient(135deg,#3a1141 0%,#6b1f4b 40%,#0e1630 100%)'
+        ];
+        let bgIndex = 0;
+        changeBgBtn.addEventListener('click', () => {
+            bgIndex = (bgIndex + 1) % backgrounds.length;
+            document.body.style.background = backgrounds[bgIndex];
+        });
+        copyBtn.addEventListener('click', async () => {
+            const txt = document.getElementById('shareText').textContent;
+            try {
+                await navigator.clipboard.writeText(txt);
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => copyBtn.textContent = 'Copy Message', 1500);
+            } catch (e) {
+                copyBtn.textContent = 'Copy (Allow clipboard)';
+                setTimeout(() => copyBtn.textContent = 'Copy Message', 2000);
+            }
+        });
+        createLights(16);
+        createPetals(14);
+        document.querySelector('.stage').addEventListener('mousemove', (e) => {
+            const root = document.querySelector('.stage');
+            const rect = root.getBoundingClientRect();
+            const cx = (e.clientX - rect.left) / rect.width - 0.5;
+            const cy = (e.clientY - rect.top) / rect.height - 0.5;
+            document.querySelectorAll('.light').forEach((el, i) => {
+                const mv = (i % 2 === 0 ? 1 : -1) * (5 + (i % 5));
+                el.style.transform = `translate(${cx * mv}px,${cy * mv}px)`;
+            });
+            document.querySelectorAll('.petal').forEach((el, i) => {
+                el.style.transform = `translate(${cx * (i % 3 + 1) * 6}px,0) rotate(${(i * 20) % 360}deg)`;
+            });
+        });
+        const deviImg = document.getElementById('deviImg');
+        deviImg.addEventListener('click', () => {
+            const url = prompt('https://www.google.com/imgres?q=devi%20images%20for%20dussehra&imgurl=https%3A%2F%2Fi.pinimg.com%2F736x%2F71%2F79%2F71%2F717971c89357b946f71519f1a7da195f.jpg&imgrefurl=https%3A%2F%2Fin.pinterest.com%2Fpin%2Fdurga-devi-wallpapers-navaratri-dussehra-special-para-android-apk-0c--236579786668038313%2F&docid=MOKjJkUTaFO_hM&tbnid=Wa7LPLgSOk8RzM&vet=12ahUKEwjP7MaQ2OKPAxUOzjgGHU9RFlgQM3oECB8QAA..i&w=735&h=817&hcb=2&ved=2ahUKEwjP7MaQ2OKPAxUOzjgGHU9RFlgQM3oECB8QAA');
+            if (url) { deviImg.src = url }
+        });
+
+    </script>
+</body>
+
+</html>
